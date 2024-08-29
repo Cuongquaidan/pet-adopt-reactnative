@@ -1,11 +1,19 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { Image } from "react-native";
 import Colors from "../../constants/Colors";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 const PetListItem = ({ pet }) => {
+    const router = useRouter();
     return (
-        <View
+        <TouchableOpacity
+            onPress={() => {
+                router.push({
+                    pathname: "/pet-details",
+                    params: pet,
+                });
+            }}
             style={{
                 padding: 10,
                 marginRight: 15,
@@ -61,7 +69,7 @@ const PetListItem = ({ pet }) => {
                     {pet?.age} Years
                 </Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
