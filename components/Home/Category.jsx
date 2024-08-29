@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Config/FirebaseConfig";
 import Colors from "../../constants/Colors";
-const Category = () => {
+const Category = ({ category }) => {
     const [categoryList, setCategoryList] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(["Dog"]);
     const getCategories = async () => {
@@ -39,7 +39,10 @@ const Category = () => {
                 renderItem={({ item, index }) => (
                     <TouchableOpacity
                         style={{ flex: 1 }}
-                        onPress={() => setSelectedCategory(item.name)}
+                        onPress={() => {
+                            setSelectedCategory(item.name);
+                            category(item.name);
+                        }}
                     >
                         <View
                             style={[
